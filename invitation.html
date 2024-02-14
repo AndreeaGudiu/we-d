@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Countdown</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <style>
+    .countdown {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #timer {
+      font-size: 36px;
+      font-weight: bold;
+    }
+    .imagine {
+      width: 300px;
+    }
+  </style>
+  <body>
+    <img class="imagine" src="/invitation.jpg" alt="sper sa mearga" />
+    <div class="countdown">
+      <h1>Nunta</h1>
+      <div id="timer"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  <script>
+    // Set the date of the wedding
+    const weddingDate = new Date("2024-03-09T12:00:00").getTime();
+
+    // Update the countdown every second
+    const timer = setInterval(function () {
+      // Get the current date and time
+      const now = new Date().getTime();
+
+      // Calculate the time remaining until the wedding
+      const timeRemaining = weddingDate - now;
+
+      // Calculate days, hours, minutes, and seconds
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+      // Display the countdown in the "timer" div
+      document.getElementById(
+        "timer"
+      ).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      // If the countdown is over, display a message
+      if (timeRemaining < 0) {
+        clearInterval(timer);
+        document.getElementById("timer").innerHTML = "The wedding has arrived!";
+      }
+    }, 1000);
+  </script>
+</html>
